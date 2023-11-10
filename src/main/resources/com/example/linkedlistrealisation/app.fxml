@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
+<?import javafx.scene.layout.VBox?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.linkedlistrealisation.controllers.AppController">
    <children>
       <MenuBar id="menuType" layoutY="1.0">
@@ -20,7 +21,6 @@
             <Menu fx:id="menuType1" mnemonicParsing="false" text="Sorting">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#sortList" text="Sort" />
-                  <MenuItem mnemonicParsing="false" text="Unsort" />
                </items></Menu>
             <Menu id="getHelp" mnemonicParsing="false" text="Help" />
         </menus>
@@ -45,7 +45,7 @@
          <content>
             <AnchorPane prefHeight="150.0" prefWidth="376.0">
                <children>
-                  <HBox fx:id="hBox" prefHeight="150.0" prefWidth="444.0" />
+                  <VBox fx:id="vBox" prefHeight="150.0" prefWidth="444.0" />
                </children>
             </AnchorPane>
          </content>

@@ -19,15 +19,6 @@ public class IntClass implements UserTypeInterface {
     }
 
     @Override
-    public Object clone() {
-        try{
-            return (IntClass) super.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Override
     public String readValueSer(Object intValue) {
         return  intValue.toString();
     }

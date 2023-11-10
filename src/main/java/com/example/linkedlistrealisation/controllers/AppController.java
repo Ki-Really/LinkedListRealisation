@@ -33,7 +33,7 @@ public class AppController {
     public Label addToEndErrorLbl;
     @FXML
     public Label findByIndexErrorLbl;
-    public Label showLabel;
+
     public TextField addId;
     public TextField removeId;
     public TextField findId;
@@ -170,17 +170,16 @@ public class AppController {
             i++;
         }
     }
-    //TODO сделать норм отображение списка, рандомную генерацию листа
     public void drawList(){
 
 
-        hBox.getChildren().clear();
+        vBox.getChildren().clear();
         int size = linkedListRealisation.getSize();
         for(int i=0; i<size;i++){
             String str = currentUserType.readValueSer(linkedListRealisation.get(i));
             Label label = new Label(str);
             label.setFont(Font.font("Roboto", FontWeight.EXTRA_BOLD, 24));
-            hBox.getChildren().add(label);
+            vBox.getChildren().add(label);
 
         }
     }

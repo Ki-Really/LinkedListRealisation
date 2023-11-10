@@ -21,15 +21,6 @@ public class PointClass implements UserTypeInterface,Cloneable {
     }
 
     @Override
-    public Object clone() {
-        try{
-           return (PointClass) super.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Override
     public String readValueSer(Object point) {
         Point pointToSer = (Point)point;
         return pointToSer.toString();
