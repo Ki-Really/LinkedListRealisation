@@ -15,12 +15,12 @@ public class IntClass implements UserTypeInterface {
 
     @Override
     public Object create() {
-        return (int)(Math.random()*100)-50;
+        return (int) (Math.random() * 100) - 50;
     }
 
     @Override
     public String readValueSer(Object intValue) {
-        return  intValue.toString();
+        return intValue.toString();
     }
 
     @Override

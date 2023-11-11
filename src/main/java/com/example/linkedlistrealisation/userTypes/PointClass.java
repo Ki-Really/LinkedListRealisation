@@ -28,7 +28,10 @@ public class PointClass implements UserTypeInterface,Cloneable {
 
     @Override
     public Object parseValueDeser(String str) {
-        String[] parameterOfPoint = str.split(" ");
+        int len = str.length();
+        String substr = str.substring(1,len-1);
+
+        String[] parameterOfPoint = substr.split(", ");
             if(parameterOfPoint.length == 2){
                 int x = Integer.parseInt(parameterOfPoint[0]);
                 int y = Integer.parseInt(parameterOfPoint[1]);

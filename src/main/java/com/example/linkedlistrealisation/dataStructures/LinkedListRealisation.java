@@ -1,24 +1,22 @@
 package com.example.linkedlistrealisation.dataStructures;
 
-import com.example.linkedlistrealisation.UserFactory;
+import com.example.linkedlistrealisation.controllers.AppController;
 import com.example.linkedlistrealisation.interfaces.LinkedListInterface;
-import com.example.linkedlistrealisation.interfaces.UserTypeInterface;
 
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.LinkedList;
+import java.util.function.Consumer;
 
-public class LinkedListRealisation<T> implements LinkedListInterface<T> {
+public class LinkedListRealisation<T> extends AppController implements LinkedListInterface<T> {
     private Node first;
     private Node last;
-    private int size=0;
-
+    private int size = 0;
 
 
     public int getSize() {
         return size;
     }
-    public void clear(){
+
+    public void clear() {
         first = null;
         last = null;
         size = 0;
@@ -26,13 +24,12 @@ public class LinkedListRealisation<T> implements LinkedListInterface<T> {
 
     @Override
     public boolean add(T value) {
-        if(size == 0){
-            first = new Node(null,null,value);
+        if (size == 0) {
+            first = new Node(null, null, value);
             last = first;
-        }
-        else{
+        } else {
             Node secondLast = last;
-            last = new Node(null,secondLast,value);
+            last = new Node(null, secondLast, value);
             secondLast.next = last;
         }
         size++;
@@ -41,7 +38,7 @@ public class LinkedListRealisation<T> implements LinkedListInterface<T> {
 
     @Override
     public boolean addByIndex(int id, T value) {
-        if(id<0 || id>size){
+        if (id < 0 || id > size) {
             throw new IndexOutOfBoundsException();
         }
         if (id == size) {
@@ -52,7 +49,7 @@ public class LinkedListRealisation<T> implements LinkedListInterface<T> {
         Node nodeToReplace = getNode(id);
         Node nodeToReplacePrev = nodeToReplace.prev;
 
-        Node nodeToAdd = new Node(nodeToReplace,nodeToReplacePrev,value);
+        Node nodeToAdd = new Node(nodeToReplace, nodeToReplacePrev, value);
 
         nodeToReplace.prev = nodeToAdd;
         if (nodeToReplacePrev != null) {
@@ -67,8 +64,8 @@ public class LinkedListRealisation<T> implements LinkedListInterface<T> {
     @Override
     public boolean remove(T value) {
         Node tempNode = first;
-        for(int i = 0;i<size;i++){
-            if(tempNode.value.equals(value)){
+        for (int i = 0; i < size; i++) {
+            if (tempNode.value.equals(value)) {
                 return removeByIndex(i);
             }
             tempNode = tempNode.next;
@@ -83,15 +80,14 @@ public class LinkedListRealisation<T> implements LinkedListInterface<T> {
         Node nodeToRemovePrev = nodeToRemove.prev;
         Node nodeToRemoveNext = nodeToRemove.next;
 
-        if(nodeToRemoveNext !=null){
+        if (nodeToRemoveNext != null) {
             nodeToRemoveNext.prev = nodeToRemovePrev;
-        }
-        else{
+        } else {
             last = nodeToRemovePrev;
         }
-        if(nodeToRemovePrev != null){
+        if (nodeToRemovePrev != null) {
             nodeToRemovePrev.next = nodeToRemoveNext;
-        }else{
+        } else {
             first = nodeToRemoveNext;
         }
         size--;
@@ -106,13 +102,13 @@ public class LinkedListRealisation<T> implements LinkedListInterface<T> {
 /*    LinkedList<Object> linkedList;
     linkedList*/
 
-    private Node getNode(int id){
-        if(id<0 || id>=size){
+    private Node getNode(int id) {
+        if (id < 0 || id >= size) {
             throw new IndexOutOfBoundsException();
         }
         Node tempNode = first;
-        for(int i=0;i<id;i++){
-            tempNode= tempNode.next;
+        for (int i = 0; i < id; i++) {
+            tempNode = tempNode.next;
         }
         return tempNode;
     }
@@ -121,8 +117,8 @@ public class LinkedListRealisation<T> implements LinkedListInterface<T> {
         return first;
     }
 
-    private Node split(Node head)
-    {
+    // возвращаем середину списка
+    private Node split(Node head) {
         Node fast = head, slow = head;
         while (fast.next != null
                 && fast.next.next != null) {
@@ -134,55 +130,62 @@ public class LinkedListRealisation<T> implements LinkedListInterface<T> {
         return temp;
     }
 
-    public LinkedListRealisation<T> sort(Comparator comparator){
+    public LinkedListRealisation<T> sort(Comparator comparator) {
         Node node = mergeSort(first, comparator);
         first = node;
         return this;
     }
-    public Node mergeSort(Node node,Comparator comparator)
-    {
+
+    public Node mergeSort(Node node, Comparator comparator) {
         if (node == null || node.next == null) {
-        return node;
-    }
+            return node;
+        }
         Node second = split(node);
 
-        // Recur for left and right halves
-        node = mergeSort(node,comparator);
-        second = mergeSort(second,comparator);
+        // проходим рекурсивно по частям списка
+        node = mergeSort(node, comparator);
+        second = mergeSort(second, comparator);
 
-        // Merge the two sorted halves
-        return merge(node, second,comparator);
+        // Сливаем части воедино
+        return merge(node, second, comparator);
     }
 
-    // Function to merge two linked lists
-    private Node merge(Node first, Node second,Comparator comparator)
-    {
-        // If first linked list is empty
+    // Функция слияния
+    private Node merge(Node first, Node second, Comparator comparator) {
+
         if (first == null) {
             return second;
         }
 
-        // If second linked list is empty
+
         if (second == null) {
             return first;
         }
 
-        // Pick the smaller value
+        // Выбираем меньшее значение
         if (comparator.compare(first.value, second.value) < 0) {
-            first.next = merge(first.next, second,comparator);
+            first.next = merge(first.next, second, comparator);
             first.next.prev = first;
             first.prev = null;
             return first;
-        }
-        else {
-            second.next = merge(first, second.next,comparator);
+        } else {
+            second.next = merge(first, second.next, comparator);
             second.next.prev = second;
             second.prev = null;
             return second;
         }
     }
 
-    private class Node{
+
+    public void forEach(Consumer<T> consumer) {
+        Node current = this.first;
+        while (current != null) {
+            consumer.accept(current.value);
+            current = current.next;
+        }
+    }
+
+    private class Node {
         private Node next;
         private Node prev;
         private T value;

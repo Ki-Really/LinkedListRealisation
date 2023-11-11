@@ -9,9 +9,8 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-
 <?import javafx.scene.layout.VBox?>
+
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.linkedlistrealisation.controllers.AppController">
    <children>
       <MenuBar id="menuType" layoutY="1.0">
@@ -22,7 +21,6 @@
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#sortList" text="Sort" />
                </items></Menu>
-            <Menu id="getHelp" mnemonicParsing="false" text="Help" />
         </menus>
       </MenuBar>
       <Button fx:id="addToEndBtn" layoutX="44.0" layoutY="355.0" mnemonicParsing="false" onAction="#addToEnd" text="AddToEnd" />
@@ -45,7 +43,7 @@
          <content>
             <AnchorPane prefHeight="150.0" prefWidth="376.0">
                <children>
-                  <VBox fx:id="vBox" prefHeight="150.0" prefWidth="444.0" />
+                  <VBox fx:id="vBox" prefHeight="150.0" prefWidth="394.0" />
                </children>
             </AnchorPane>
          </content>
@@ -55,5 +53,8 @@
       <Separator layoutX="457.0" layoutY="262.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="4.0" />
       <Label fx:id="valueForFind" layoutX="477.0" layoutY="301.0" prefHeight="18.0" prefWidth="101.0" visible="false" />
       <Button fx:id="clearBtn" layoutX="252.0" layoutY="27.0" mnemonicParsing="false" onAction="#clearList" text="Clear!" />
+      <Button layoutX="512.0" layoutY="53.0" mnemonicParsing="false" onAction="#saveToFile" text="Save" />
+      <Button layoutX="511.0" layoutY="88.0" mnemonicParsing="false" onAction="#loadFromFile" text="Load" />
+      <Label fx:id="errorLoading" layoutX="208.0" layoutY="216.0" text="Невозможно загрузить из файла!" visible="false" />
    </children>
 </AnchorPane>

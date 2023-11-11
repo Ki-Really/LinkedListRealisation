@@ -13,7 +13,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.FontWeight;
 
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
@@ -41,6 +41,7 @@ public class AppController {
     public Button clearBtn;
     public VBox vBox;
     public HBox hBox;
+    public Label errorLoading;
     @FXML
     Button addToEndBtn;
 
@@ -171,17 +172,20 @@ public class AppController {
         }
     }
     public void drawList(){
-
-
         vBox.getChildren().clear();
-        int size = linkedListRealisation.getSize();
-        for(int i=0; i<size;i++){
-            String str = currentUserType.readValueSer(linkedListRealisation.get(i));
+//        int size = linkedListRealisation.getSize();
+//        for(int i=0; i<size;i++){
+//            String str = currentUserType.readValueSer(linkedListRealisation.get(i));
+//            Label label = new Label(str);
+//            label.setFont(Font.font("Roboto", FontWeight.EXTRA_BOLD, 24));
+//            vBox.getChildren().add(label);
+//        }
+        this.linkedListRealisation.forEach(elem -> {
+            String str = currentUserType.readValueSer(elem);
             Label label = new Label(str);
             label.setFont(Font.font("Roboto", FontWeight.EXTRA_BOLD, 24));
             vBox.getChildren().add(label);
-
-        }
+        });
     }
 
     private void disableManagingBtn(){
@@ -201,5 +205,51 @@ public class AppController {
         addByIndexErrorLbl.setVisible(false);
         removeByIndexErrorLbl.setVisible(false);
         findByIndexErrorLbl.setVisible(false);
+    }
+
+    public void saveToFile() {
+        try{
+            FileWriter fileWriter = new FileWriter(new File("save.txt"));
+            fileWriter.write(currentUserType.typeName()+"\n");
+            for (int i = 0;i<linkedListRealisation.getSize();i++) {//Задействовать foreach
+                fileWriter.write(linkedListRealisation.get(i).toString() +"\n");
+            }
+            fileWriter.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public void loadFromFile() {
+        linkedListRealisation.clear();
+        errorLoading.setVisible(false);
+        String file = "save.txt";
+
+        int i = 0;
+        //UserTypeInterface userType;
+        try{
+            BufferedReader br
+                    = new BufferedReader(new FileReader(file));
+            String type;
+            String str;
+
+            type = br.readLine();
+            if(!type.equals(currentUserType.typeName())){
+                errorLoading.setVisible(true);
+                linkedListRealisation.clear();
+                return;
+            }
+            while ((str = br.readLine()) != null){
+                linkedListRealisation.add(currentUserType.parseValueDeser(str));
+            }
+
+            drawList();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }
