@@ -6,9 +6,7 @@ import com.example.linkedlistrealisation.userTypes.PointClass;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static java.util.Arrays.stream;
 
 public class UserFactory {
     private ArrayList<UserTypeInterface> list = new ArrayList<>();
@@ -27,4 +25,3 @@ public class UserFactory {
                 .findAny().orElse(null);
     }
 }
-

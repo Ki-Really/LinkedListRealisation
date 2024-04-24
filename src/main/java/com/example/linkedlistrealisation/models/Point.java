@@ -1,10 +1,9 @@
 package com.example.linkedlistrealisation.models;
 
-import com.example.linkedlistrealisation.comparators.PointComparator;
 
 import java.io.Serializable;
 
-public class Point extends PointComparator implements Serializable {
+public class Point implements Serializable {
     private int x;
     private int y;
     public Point(int x, int y) {

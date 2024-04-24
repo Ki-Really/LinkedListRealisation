@@ -2,10 +2,7 @@ package com.example.linkedlistrealisation.userTypes;
 
 import com.example.linkedlistrealisation.comparators.IntComparator;
 import com.example.linkedlistrealisation.interfaces.UserTypeInterface;
-import com.example.linkedlistrealisation.models.Point;
 
-import java.io.InputStreamReader;
-import java.util.Comparator;
 
 public class IntClass implements UserTypeInterface {
     @Override
@@ -33,5 +30,4 @@ public class IntClass implements UserTypeInterface {
     public IntComparator getTypeComparator() {
         return new IntComparator();
     }
-
 }

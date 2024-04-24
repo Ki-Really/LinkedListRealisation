@@ -1,12 +1,11 @@
 package com.example.linkedlistrealisation.dataStructures;
 
-import com.example.linkedlistrealisation.controllers.AppController;
 import com.example.linkedlistrealisation.interfaces.LinkedListInterface;
 
 import java.util.Comparator;
 import java.util.function.Consumer;
 
-public class LinkedListRealisation<T> extends AppController implements LinkedListInterface<T> {
+public class LinkedListRealisation<T>  implements LinkedListInterface<T> {
     private Node first;
     private Node last;
     private int size = 0;

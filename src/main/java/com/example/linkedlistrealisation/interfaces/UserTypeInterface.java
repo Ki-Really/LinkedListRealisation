@@ -5,10 +5,10 @@ import java.util.Comparator;
 
 public interface UserTypeInterface{
     String typeName();
-     Object create();
 
-     String readValueSer(Object obj);
+    Object create();
+
+    String readValueSer(Object obj);
      Object parseValueDeser(String ss);
-
      Comparator getTypeComparator();
 }

@@ -4,10 +4,6 @@ import com.example.linkedlistrealisation.comparators.PointComparator;
 import com.example.linkedlistrealisation.interfaces.UserTypeInterface;
 import com.example.linkedlistrealisation.models.Point;
 
-import java.io.FileOutputStream;
-import java.io.InputStreamReader;
-import java.io.ObjectOutputStream;
-import java.util.Comparator;
 
 public class PointClass implements UserTypeInterface,Cloneable {
     @Override
